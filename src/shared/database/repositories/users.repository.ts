@@ -11,7 +11,7 @@ export class UsersRepository {
     return await this.prismaService.user.create(createDto);
   }
 
-  async findUnique(userUniqueDto: Prisma.UserFindUniqueArgs) {
-    return await this.prismaService.user.findUnique(userUniqueDto);
+  async findUnique(findUniqueDto: Prisma.UserFindUniqueArgs) {
+    return await this.prismaService.user.findUnique(findUniqueDto);
   }
 }
