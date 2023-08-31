@@ -14,7 +14,6 @@ export class UsersRepository {
   async findByEmail(email: string) {
     return await this.prismaService.user.findUnique({
       where: { email },
-      select: { id: true },
     });
   }
 }
