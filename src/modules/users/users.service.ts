@@ -9,6 +9,10 @@ export class UsersService {
   async getUserById(id: string) {
     return await this.usersRepository.findUnique({
       where: { id },
+      select: {
+        name: true,
+        email: true,
+      },
     });
   }
 }
