@@ -11,22 +11,7 @@ export class UsersRepository {
     return await this.prismaService.user.create(createDto);
   }
 
-  async findByEmail(email: string) {
-    return await this.prismaService.user.findUnique({
-      where: { email },
-    });
-  }
-
-  async findById(id: string) {
-    return await this.prismaService.user.findUnique({
-      where: { id },
-      select: {
-        name: true,
-        email: true,
-        categories: true,
-        transactions: true,
-        bankAccounts: true,
-      },
-    });
+  async findUnique(userUniqueDto: Prisma.UserFindUniqueArgs) {
+    return await this.prismaService.user.findUnique(userUniqueDto);
   }
 }

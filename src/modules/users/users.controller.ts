@@ -8,7 +8,6 @@ export class UsersController {
   @Get('me')
   me(@Req() request: any) {
     const { userId } = request;
-    console.log({ userId });
     return this.usersService.getUserById(userId);
   }
 }

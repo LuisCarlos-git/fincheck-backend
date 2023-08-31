@@ -20,7 +20,9 @@ export class AuthService {
 
   async authenticate(authenticateDto: AuthenticateDto) {
     const { email, password } = authenticateDto;
-    const user = await this.usersRepository.findByEmail(email);
+    const user = await this.usersRepository.findUnique({
+      where: { email },
+    });
 
     if (!user)
       throw new UnauthorizedException({ message: 'Invalid credentials' });
@@ -36,7 +38,9 @@ export class AuthService {
   async signup(signupDto: SignupDto) {
     const { email, password, name } = signupDto;
 
-    const userExists = await this.usersRepository.findByEmail(email);
+    const userExists = await this.usersRepository.findUnique({
+      where: { email },
+    });
 
     if (userExists)
       throw new ConflictException({

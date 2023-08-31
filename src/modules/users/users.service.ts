@@ -7,6 +7,8 @@ export class UsersService {
   constructor(private readonly usersRepository: UsersRepository) {}
 
   async getUserById(id: string) {
-    return await this.usersRepository.findById(id);
+    return await this.usersRepository.findUnique({
+      where: { id },
+    });
   }
 }
