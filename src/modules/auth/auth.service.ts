@@ -30,15 +30,7 @@ export class AuthService {
     if (!isPasswordValid)
       throw new UnauthorizedException({ message: 'Invalid credentials' });
 
-    const payload = {
-      sub: user.id,
-    };
-
-    const accessToken = await this.jwtService.signAsync(payload);
-
-    return {
-      accessToken,
-    };
+    return this.generateAccessToken(user.id);
   }
 
   async signup(signupDto: SignupDto) {
@@ -53,7 +45,7 @@ export class AuthService {
 
     const hashedPassword = await hash(password, 12);
 
-    const userId = await this.usersRepository.create({
+    const user = await this.usersRepository.create({
       data: {
         email,
         name,
@@ -77,10 +69,13 @@ export class AuthService {
           },
         },
       },
-      select: {
-        id: true,
-      },
     });
+
+    return this.generateAccessToken(user.id);
+  }
+
+  private async generateAccessToken(userId: string) {
+    const accessToken = await this.jwtService.signAsync({ sub: userId });
 
     const payload = { sub: userId };
 
