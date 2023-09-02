@@ -10,7 +10,14 @@ import { BankAccountsModule } from './modules/bank-accounts/bank-accounts.module
 import { TransactionsModule } from './modules/transactions/transactions.module';
 
 @Module({
-  imports: [DatabaseModule, AuthModule, UsersModule, CategoriesModule, BankAccountsModule, TransactionsModule],
+  imports: [
+    DatabaseModule,
+    AuthModule,
+    UsersModule,
+    CategoriesModule,
+    BankAccountsModule,
+    TransactionsModule,
+  ],
   controllers: [],
   providers: [
     {
