@@ -19,7 +19,9 @@ export class BankAccountsRepository {
     return await this.prismaService.bankAccount.delete(deleteDto);
   }
 
-  async findMany(findManyDto: Prisma.BankAccountFindManyArgs) {
+  async findMany<T extends Prisma.BankAccountFindManyArgs>(
+    findManyDto: Prisma.SelectSubset<T, Prisma.BankAccountFindManyArgs>,
+  ) {
     return await this.prismaService.bankAccount.findMany(findManyDto);
   }
 
